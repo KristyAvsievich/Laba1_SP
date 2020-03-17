@@ -10,13 +10,15 @@ do
 	read name
 	if [[ $name != "" ]]
 	then
-		rpm -qi $name		
-
-
-
-
-
- 
+		if [[ yum list installed $name == *"Installed Packages"* ]]
+		then 
+			yum info $name
+		else
+			echo "Данный пакет не установлен"
+			yum search $name
+			yum install $name -y
+			exit 0
+		fi	
 	else
 		echo "Имя пакета не может быть пустым!"
 	fi
