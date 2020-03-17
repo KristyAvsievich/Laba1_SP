@@ -10,15 +10,24 @@ do
 	read name
 	if [[ $name != "" ]]
 	then
-		otvet=yum list installed $name
+		otvet=`yum list installed $name`
 		if [[ $otvet == *"Installed Packages"* ]]
 		then 
 			yum info $name
 		else
-			echo "Данный пакет не установлен"
-			yum search $name
-			yum install $name -y
-			exit 0
+			echo -e "\nДанный пакет не установлен\n"
+			yum install $name --downloadonly
+			echo -e "\n\nХотите ли Вы установить или выйти? (i - установить/e - выйти)"
+			read reshenie
+			if [[ $reshenie = "i" ]]
+			then
+				yum install $name -y
+			else
+				if [[ $reshenie = "e" ]]
+				then
+					exit 0
+				fi
+			fi
 		fi	
 	else
 		echo "Имя пакета не может быть пустым!"
