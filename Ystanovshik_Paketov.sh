@@ -10,7 +10,7 @@ do
 	read name
 	if [[ $name != "" ]]
 	then
-		otvet = yum list installed $name
+		otvet=yum list installed $name
 		if [[ $otvet == *"Installed Packages"* ]]
 		then 
 			yum info $name
