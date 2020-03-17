@@ -16,7 +16,7 @@ do
 			yum info $name
 		else
 			echo -e "\nДанный пакет не установлен\n"
-			yum install $name --downloadonly
+			yum install $name --downloadonly -y
 			echo -e "\n\nХотите ли Вы установить или выйти? (i - установить/e - выйти)"
 			read reshenie
 			if [[ $reshenie = "i" ]]
